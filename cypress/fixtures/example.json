@@ -1,5 +1,9 @@
-{
-  "name": "Using fixtures to represent data",
-  "email": "hello@cypress.io",
-  "body": "Fixtures are a great way to mock data for responses to routes"
-}
+cy.readFile("cypress/fixtures/dataFile.json", (err, data) => {
+    if (err) {
+        return console.error(err);
+    };
+}).then((data) => {
+    data.table[0].number = 3
+    data.table[1].number = 4
+    cy.writeFile("cypress/fixtures/dataFile.json", JSON.stringify(data))
+})
